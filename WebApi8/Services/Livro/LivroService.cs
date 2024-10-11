@@ -76,7 +76,7 @@ namespace WebApi8.Services.Livro
             ResponseModel<List<LivroModel>> resposta = new ResponseModel<List<LivroModel>>();
             try
             {
-                var autor = await _context.Autores.FirstOrDefaultAsync(autorBanco => autorBanco.Id == livroCriacaoDto.Id);
+                var autor = await _context.Autores.FirstOrDefaultAsync(autorBanco => autorBanco.Id == livroCriacaoDto.Autor.Id);
 
                 if (autor == null)
                 {
@@ -111,7 +111,7 @@ namespace WebApi8.Services.Livro
             {
                 var livro = await _context.Livros
                     .Include(a => a.Autor)
-                    .FirstOrDefaultAsync(livroBanco => livroBanco.Id == livroEdicaoDto.Id);
+                    .FirstOrDefaultAsync(livroBanco => livroBanco.Id == livroEdicaoDto.Autor.Id);
 
                 var autor = await _context.Autores
                     .FirstOrDefaultAsync(autorBanco => autorBanco.Id == livroEdicaoDto.Autor.Id);
